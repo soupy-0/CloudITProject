@@ -1,0 +1,4 @@
+{
+    "appService.deploySubpath": "MeetSync/publish/",
+    "appService.defaultWebAppToDeploy": "/subscriptions/7239d200-ed93-4269-bf89-d393c127719f/resourceGroups/MeetS_group/providers/Microsoft.Web/sites/MeetSync"
+}

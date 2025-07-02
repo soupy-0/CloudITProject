@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "v7g0tT15eKriEKAoadI09GgMAp2H7LuZaEysHGbxBvY=",
+  "Source": "MeetSync",
+  "BasePath": "_content/MeetSync",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "MeetSync/wwwroot",
+      "Source": "MeetSync",
+      "ContentRoot": "/workspaces/CloudITProject/MeetSync/wwwroot/",
+      "BasePath": "_content/MeetSync",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/workspaces/CloudITProject/MeetSync/wwwroot/site.css",
+      "SourceId": "MeetSync",
+      "SourceType": "Discovered",
+      "ContentRoot": "/workspaces/CloudITProject/MeetSync/wwwroot/",
+      "BasePath": "_content/MeetSync",
+      "RelativePath": "site.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/site.css"
+    }
+  ]
+}
