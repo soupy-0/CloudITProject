@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "v7g0tT15eKriEKAoadI09GgMAp2H7LuZaEysHGbxBvY=",
+  "Hash": "QEznWNN1/m6X/OGu7oX5Ydy1UX2N3cjcsm+HHM2okto=",
   "Source": "MeetSync",
   "BasePath": "_content/MeetSync",
   "Mode": "Default",
@@ -16,6 +16,44 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "/workspaces/CloudITProject/MeetSync/wwwroot/CloudIT_Project_Images/BlueGradient_Background.jpg",
+      "SourceId": "MeetSync",
+      "SourceType": "Discovered",
+      "ContentRoot": "/workspaces/CloudITProject/MeetSync/wwwroot/",
+      "BasePath": "_content/MeetSync",
+      "RelativePath": "CloudIT_Project_Images/BlueGradient_Background.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/CloudIT_Project_Images/BlueGradient_Background.jpg"
+    },
+    {
+      "Identity": "/workspaces/CloudITProject/MeetSync/wwwroot/CloudIT_Project_Images/MeetSync Logo.png",
+      "SourceId": "MeetSync",
+      "SourceType": "Discovered",
+      "ContentRoot": "/workspaces/CloudITProject/MeetSync/wwwroot/",
+      "BasePath": "_content/MeetSync",
+      "RelativePath": "CloudIT_Project_Images/MeetSync Logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/CloudIT_Project_Images/MeetSync Logo.png"
+    },
     {
       "Identity": "/workspaces/CloudITProject/MeetSync/wwwroot/site.css",
       "SourceId": "MeetSync",

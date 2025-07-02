@@ -13,19 +13,19 @@
       "PackagePath": "staticwebassets/site.css"
     },
     {
-      "Id": "obj/Release/net8.0/staticwebassets/msbuild.MeetSync.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.MeetSync.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj/Release/net8.0/staticwebassets/msbuild.build.MeetSync.props",
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.MeetSync.props",
       "PackagePath": "build\\MeetSync.props"
     },
     {
-      "Id": "obj/Release/net8.0/staticwebassets/msbuild.buildMultiTargeting.MeetSync.props",
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.MeetSync.props",
       "PackagePath": "buildMultiTargeting\\MeetSync.props"
     },
     {
-      "Id": "obj/Release/net8.0/staticwebassets/msbuild.buildTransitive.MeetSync.props",
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.MeetSync.props",
       "PackagePath": "buildTransitive\\MeetSync.props"
     }
   ],

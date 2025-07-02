@@ -1,9 +1,40 @@
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
+*{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: Montserrat, sans-serif;
 }
-h1 {
-    color: #0078d7;
+
+.header
+{
+    background-image: url(/CloudIT_Project_Images/BlueGradient_Background.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.top-nav 
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 0 15px;
+    border-bottom: 1px solid #000000;
+}
+
+.top-nav ul li
+{
+    list-style: none;
+    display: inline-block;
+    margin-right: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.top-nav ul li a
+{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 15px;
 }
