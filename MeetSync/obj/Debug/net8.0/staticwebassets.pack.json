@@ -5,8 +5,20 @@
       "PackagePath": "staticwebassets/CloudIT_Project_Images/BlueGradient_Background.jpg"
     },
     {
+      "Id": "/workspaces/CloudITProject/MeetSync/wwwroot/CloudIT_Project_Images/Meet.png",
+      "PackagePath": "staticwebassets/CloudIT_Project_Images/Meet.png"
+    },
+    {
       "Id": "/workspaces/CloudITProject/MeetSync/wwwroot/CloudIT_Project_Images/MeetSync Logo.png",
       "PackagePath": "staticwebassets/CloudIT_Project_Images/MeetSync Logo.png"
+    },
+    {
+      "Id": "/workspaces/CloudITProject/MeetSync/wwwroot/CloudIT_Project_Images/MeetSync-Logo-Finale.png",
+      "PackagePath": "staticwebassets/CloudIT_Project_Images/MeetSync-Logo-Finale.png"
+    },
+    {
+      "Id": "/workspaces/CloudITProject/MeetSync/wwwroot/gradientAnimation.js",
+      "PackagePath": "staticwebassets/gradientAnimation.js"
     },
     {
       "Id": "/workspaces/CloudITProject/MeetSync/wwwroot/site.css",

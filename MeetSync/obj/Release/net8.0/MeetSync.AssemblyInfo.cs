@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MeetSync")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b5bd7666e42c955534497bd77c63cc7f1b126fc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+882a148425fe9e0ae0da8f4a4c6359bbbfe8761b")]
 [assembly: System.Reflection.AssemblyProductAttribute("MeetSync")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MeetSync")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
