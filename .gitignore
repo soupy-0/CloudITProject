@@ -1,0 +1,30 @@
+# Build results
+bin/
+obj/
+publish/
+
+# Configuration files with secrets
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Database files
+*.db
+*.sqlite*
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env*
+
+# Azure publish profiles
+*.azurepubxml
+*.pubxml
+*.PublishSettings
