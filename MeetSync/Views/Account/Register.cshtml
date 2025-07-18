@@ -1,0 +1,82 @@
+@model MeetSync.Models.RegisterViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Register - MeetSync";
+}
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400..800&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/site.css" />
+</head>
+
+<body>
+    <div class="header">
+        <div class="top-nav">
+            <ul>
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li><a href="@Url.Action("MyProfile", "Home")">My Profile</a></li>
+                <li><a href="@Url.Action("About", "Home")">About</a></li>
+                <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+            </ul>
+            <button>Contact Us</button>
+        </div>
+        
+        <div class="surface">
+            <h1>Join MeetSync</h1>
+            
+            <form asp-action="Register" method="post" style="max-width: 500px; margin: 0 auto;">
+                @Html.AntiForgeryToken()
+                
+                <div asp-validation-summary="ModelOnly" style="color: #ff6b6b; margin-bottom: 1rem;"></div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label asp-for="Name" style="display: block; margin-bottom: 0.5rem; color: white;">Full Name:</label>
+                    <input asp-for="Name" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;" />
+                    <span asp-validation-for="Name" style="color: #ff6b6b; font-size: 0.875rem;"></span>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label asp-for="Email" style="display: block; margin-bottom: 0.5rem; color: white;">Email:</label>
+                    <input asp-for="Email" type="email" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;" />
+                    <span asp-validation-for="Email" style="color: #ff6b6b; font-size: 0.875rem;"></span>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label asp-for="Password" style="display: block; margin-bottom: 0.5rem; color: white;">Password:</label>
+                    <input asp-for="Password" type="password" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;" />
+                    <span asp-validation-for="Password" style="color: #ff6b6b; font-size: 0.875rem;"></span>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label asp-for="ConfirmPassword" style="display: block; margin-bottom: 0.5rem; color: white;">Confirm Password:</label>
+                    <input asp-for="ConfirmPassword" type="password" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;" />
+                    <span asp-validation-for="ConfirmPassword" style="color: #ff6b6b; font-size: 0.875rem;"></span>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label asp-for="Workplace" style="display: block; margin-bottom: 0.5rem; color: white;">Workplace (Optional):</label>
+                    <input asp-for="Workplace" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;" />
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label asp-for="AboutSection" style="display: block; margin-bottom: 0.5rem; color: white;">About You (Optional):</label>
+                    <textarea asp-for="AboutSection" rows="3" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white; resize: vertical;"></textarea>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label asp-for="Interests" style="display: block; margin-bottom: 0.5rem; color: white;">Interests (comma-separated):</label>
+                    <input asp-for="Interests" placeholder="e.g., JavaScript, Design, Marketing" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;" />
+                </div>
+                
+                <button type="submit" style="width: 100%; padding: 0.75rem; background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 5px; font-size: 1rem; font-weight: 600; cursor: pointer;">Create Account</button>
+                
+                <p style="text-align: center; margin-top: 1rem; color: rgba(255,255,255,0.8);">
+                    Already have an account? <a href="@Url.Action("Login", "Account")" style="color: #667eea;">Login here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    <script src="~/gradientAnimation.js"></script>
+</body>

@@ -1,0 +1,35 @@
+@{
+    ViewData["Title"] = "About - MeetSync";
+}
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400..800&family=Huninn&family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400..800&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/site.css" />
+</head>
+
+<body>
+    <div class="header">
+        <div class="top-nav">
+            <ul>
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li><a href="@Url.Action("MyProfile", "Home")">My Profile</a></li>
+                <li><a href="@Url.Action("About", "Home")">About</a></li>
+            </ul>
+            <button onclick="window.location.href='@Url.Action("Contact", "Home")'">Contact Us</button>
+        </div>
+        <div class="surface">
+            <h1>About MeetSync</h1>
+            <p>
+                MeetSync is a revolutionary platform designed to streamline your meeting management experience.
+                Our application helps teams coordinate, schedule, and manage meetings efficiently.
+                
+                Founded with the vision of making collaboration seamless, MeetSync brings together
+                powerful scheduling tools with an intuitive user interface.
+            </p>
+        </div>
+    </div>
+    <script src="~/gradientAnimation.js"></script>
+</body>

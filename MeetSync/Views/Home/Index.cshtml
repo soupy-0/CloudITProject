@@ -15,9 +15,11 @@
     <div class="header">
         <div class="top-nav">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li><a href="@Url.Action("MyProfile", "Home")">My Profile</a></li>
+                <li><a href="@Url.Action("About", "Home")">About</a></li>
+                <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+                <li><a href="@Url.Action("Register", "Account")">Register</a></li>
             </ul>
             <button>Contact Us</button>
         </div>
@@ -36,9 +38,6 @@
         Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.  
         Duis autem vel eum iriure dolor in </p>
     </div>
-        <div class="side-nav">
-            <a href="#">You can find Us here!</a>
-        </div>
     </div>
     <script src="~/gradientAnimation.js"></script>
 </body>
