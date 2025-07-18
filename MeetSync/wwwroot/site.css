@@ -61,25 +61,152 @@ body
     background: #fff;     
     border-radius: 20px;   
     box-shadow: 0 4px 24px rgba(0,0,0,0.1); 
-    padding: 40px;         
+     padding: 50px; /* More padding */
 }
 
+.surface h1 {
+    margin-bottom: 2rem; /* More space from headline */
+    color: #333;
+    text-align: center;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 1.5rem; /* More spacing between fields */
+}
+
+/* Modern input field styling */
 .form-input {
     color: #333 !important;
-    background-color: #fff !important;
-    border: 2px solid #ddd !important;
-    padding: 0.75rem !important;
-    border-radius: 5px !important;
+    background-color: #f8f9fa !important;
+    border: 2px solid #e9ecef !important;
+    padding: 1rem !important; /* Bigger padding */
+    border-radius: 12px !important; /* Rounded corners */
     width: 100% !important;
+    font-size: 16px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
 }
 
+/* Focus state for inputs */
+.form-input:focus {
+    outline: none !important;
+    border-color: #4C3BCF !important;
+    background-color: #fff !important;
+    box-shadow: 0 0 0 3px rgba(76, 59, 207, 0.15), 0 4px 8px rgba(0,0,0,0.1) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Enhanced textarea styling */
 .form-textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 100px; /* Bigger textarea */
+    font-family: inherit;
 }
 
 .form-textarea:focus {
-    outline: none;
-    border-color: #4C3BCF;
-    box-shadow: 0 0 0 3px rgba(76, 59, 207, 0.2);
+    outline: none !important;
+    border-color: #4C3BCF !important;
+    background-color: #fff !important;
+    box-shadow: 0 0 0 3px rgba(76, 59, 207, 0.15), 0 4px 8px rgba(0,0,0,0.1) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Label styling */
+.surface label {
+    display: block !important;
+    margin-bottom: 0.75rem !important;
+    color: #333 !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+/* Placeholder styling */
+.form-input::placeholder {
+    color: #6c757d !important;
+    opacity: 0.8 !important;
+}
+
+/* Enhanced button styling to match Contact Us */
+.submit-button {
+    background: #402e7a !important; /* Same as Contact Us button */
+    color: #ffffff !important;
+    border: 0 !important;
+    padding: 15px 30px !important; /* Bigger button */
+    border-radius: 30px !important; /* Same rounded style */
+    cursor: pointer !important;
+    outline: 0 !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    width: 100% !important;
+    margin-top: 1rem !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(64, 46, 122, 0.3) !important;
+}
+
+/* Button hover effect */
+.submit-button:hover {
+    background: #352666 !important; /* Darker on hover */
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(64, 46, 122, 0.4) !important;
+}
+
+/* Button active state */
+.submit-button:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 8px rgba(64, 46, 122, 0.3) !important;
+}
+
+/* Validation error styling */
+.validation-error {
+    color: #dc3545 !important;
+    font-size: 0.875rem !important;
+    display: block !important;
+    margin-top: 0.5rem !important;
+    font-weight: 500 !important;
+}
+
+/* Validation summary styling */
+.validation-summary {
+    background-color: #f8d7da !important;
+    color: #721c24 !important;
+    border: 1px solid #f5c6cb !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* Checkbox styling */
+.checkbox-label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    color: #333 !important;
+    font-weight: normal !important;
+    margin-bottom: 1rem !important;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0 !important;
+    accent-color: #4C3BCF !important;
+}
+
+/* Register/Login link styling */
+.register-link {
+    text-align: center !important;
+    margin-top: 1.5rem !important;
+    color: #333 !important;
+    font-size: 14px !important;
+}
+
+.register-link a {
+    color: #4C3BCF !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+}
+
+.register-link a:hover {
+    text-decoration: underline !important;
 }
