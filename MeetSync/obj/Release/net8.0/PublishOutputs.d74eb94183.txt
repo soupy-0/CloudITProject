@@ -1,7 +1,0 @@
-/workspaces/CloudITProject/MeetSync/publish/MeetSync
-/workspaces/CloudITProject/MeetSync/publish/appsettings.Development.json
-/workspaces/CloudITProject/MeetSync/publish/appsettings.json
-/workspaces/CloudITProject/MeetSync/publish/MeetSync.dll
-/workspaces/CloudITProject/MeetSync/publish/MeetSync.deps.json
-/workspaces/CloudITProject/MeetSync/publish/MeetSync.runtimeconfig.json
-/workspaces/CloudITProject/MeetSync/publish/MeetSync.pdb
