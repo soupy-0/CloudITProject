@@ -8,7 +8,7 @@ builder.Services.AddControllersWithViews();
 
 // Add Entity Framework (add this back once ApplicationDbContext exists)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MeetSyncDefaultConnection")));
 
 // Add session support
 builder.Services.AddDistributedMemoryCache();
@@ -28,10 +28,29 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+if (app.Environment.IsProduction())
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        try
+        {
+            context.Database.Migrate();
+        }
+        catch (Exception ex)
+        {
+            // Log migration error
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An error occurred while migrating the database.");
+        }
+    }
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
