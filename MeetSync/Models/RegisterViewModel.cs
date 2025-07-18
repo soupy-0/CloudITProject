@@ -28,6 +28,6 @@ namespace MeetSync.Models
         [StringLength(1000)]
         public string? AboutSection { get; set; }
 
-        public string? Interests { get; set; } // Comma-separated interests
+        public string? Interests { get; set; } 
     }
 }

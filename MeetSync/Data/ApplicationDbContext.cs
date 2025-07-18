@@ -10,13 +10,12 @@ namespace MeetSync.Data
         }
 
         public DbSet<User> Users { get; set; } = null!;
-        public DbSet<UserInterest> UserInterests { get; set; } = null!;
+        public DbSet<UserInterest> UserInterests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configure User entity
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -28,7 +27,6 @@ namespace MeetSync.Data
                 entity.Property(e => e.AboutSection).HasMaxLength(1000);
             });
 
-            // Configure UserInterest entity
             modelBuilder.Entity<UserInterest>(entity =>
             {
                 entity.HasKey(e => e.Id);

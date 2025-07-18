@@ -3,14 +3,25 @@ using MeetSync.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services
 builder.Services.AddControllersWithViews();
 
-// Add Entity Framework (add this back once ApplicationDbContext exists)
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+}
 
-// Add session support
+builder.Services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
+{
+    options.UseSqlServer(connectionString);
+    
+    if (builder.Environment.IsDevelopment())
+    {
+        options.EnableSensitiveDataLogging();
+        options.EnableDetailedErrors();
+    }
+});
+
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -21,86 +32,124 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
-// Configure pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
-using (var scope = app.Services.CreateScope())
+if (!app.Environment.IsDevelopment())
 {
+    _ = Task.Run(async () =>
+    {
+        await Task.Delay(5000);
+        
+        using var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        
+        try
+        {
+            logger.LogInformation("🔄 Starting background database initialization...");
+            
+            var canConnect = await context.Database.CanConnectAsync();
+            if (canConnect)
+            {
+                logger.LogInformation("✅ Database connection successful");
+                
+              
+                var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
+                if (pendingMigrations.Any())
+                {
+                    logger.LogInformation("Applying {Count} pending migrations: {Migrations}", 
+                        pendingMigrations.Count(), string.Join(", ", pendingMigrations));
+                    
+                    await context.Database.MigrateAsync();
+                    logger.LogInformation("✅ Database migrations completed");
+                }
+                else
+                {
+                    logger.LogInformation("✅ No pending migrations");
+                }
+                
+                
+                var userCount = await context.Users.CountAsync();
+                logger.LogInformation("✅ Database verification: {UserCount} users", userCount);
+            }
+            else
+            {
+                logger.LogError("❌ Cannot connect to database");
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "❌ Background database initialization failed: {Message}", ex.Message);
+        }
+    });
+}
+else
+{
+    
+    using var scope = app.Services.CreateScope();
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
     
     try
     {
-        logger.LogInformation("Starting database migration with Azure AD authentication...");
+        logger.LogInformation("Development: Testing database connection...");
         
-        // Test connection with retry logic
-        var retryCount = 0;
-        var maxRetries = 3;
-        bool connected = false;
+        using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
+        var canConnect = await context.Database.CanConnectAsync(cts.Token);
         
-        while (!connected && retryCount < maxRetries)
+        if (canConnect)
         {
-            try
-            {
-                connected = await context.Database.CanConnectAsync();
-                if (connected)
-                {
-                    logger.LogInformation("Successfully connected to Azure SQL Database using Azure AD");
-                    break;
-                }
-            }
-            catch (Exception ex)
-            {
-                retryCount++;
-                logger.LogWarning(ex, "Connection attempt {RetryCount} failed, retrying...", retryCount);
-                if (retryCount < maxRetries)
-                {
-                    await Task.Delay(TimeSpan.FromSeconds(5)); // Wait before retry
-                }
-            }
+            logger.LogInformation("✅ Database connected in development");
+            await context.Database.MigrateAsync(cts.Token);
         }
-        
-        if (connected)
-        {
-            // Apply migrations
-            var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
-            logger.LogInformation($"Pending migrations: {string.Join(", ", pendingMigrations)}");
-            
-            if (pendingMigrations.Any())
-            {
-                await context.Database.MigrateAsync();
-                logger.LogInformation("Database migration completed successfully");
-            }
-            else
-            {
-                logger.LogInformation("No pending migrations found");
-            }
-            
-            // Verify tables exist
-            var userCount = await context.Users.CountAsync();
-            logger.LogInformation($"Current user count in database: {userCount}");
-        }
-        else
-        {
-            logger.LogError("Failed to connect to database after {MaxRetries} attempts", maxRetries);
-        }
+    }
+    catch (OperationCanceledException)
+    {
+        logger.LogWarning("⚠️ Database operation timed out - continuing startup");
     }
     catch (Exception ex)
     {
-        logger.LogError(ex, "Database migration failed: {Message}", ex.Message);
-        logger.LogError("Inner exception: {InnerException}", ex.InnerException?.Message);
-        
-        // In production, don't crash the app - let it start without migration
-        if (app.Environment.IsDevelopment())
-        {
-            throw;
-        }
+        logger.LogWarning(ex, "⚠️ Database connection failed - continuing startup");
     }
 }
+
+
+app.MapGet("/health", () => Results.Ok(new { 
+    Status = "Healthy", 
+    Timestamp = DateTime.UtcNow,
+    Environment = app.Environment.EnvironmentName 
+}));
+
+
+app.MapGet("/health/database", async (ApplicationDbContext context) =>
+{
+    try
+    {
+        using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+        var canConnect = await context.Database.CanConnectAsync(cts.Token);
+        
+        if (canConnect)
+        {
+            var userCount = await context.Users.CountAsync(cts.Token);
+            return Results.Ok(new { 
+                Status = "Healthy", 
+                DatabaseConnected = true,
+                UserCount = userCount,
+                Timestamp = DateTime.UtcNow 
+            });
+        }
+        
+        return Results.Problem("Database connection failed");
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem($"Database health check failed: {ex.Message}");
+    }
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
