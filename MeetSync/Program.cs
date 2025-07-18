@@ -8,7 +8,7 @@ builder.Services.AddControllersWithViews();
 
 // Add Entity Framework (add this back once ApplicationDbContext exists)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MeetSyncDefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add session support
 builder.Services.AddDistributedMemoryCache();
@@ -28,20 +28,76 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-if (app.Environment.IsProduction())
+using (var scope = app.Services.CreateScope())
 {
-    using (var scope = app.Services.CreateScope())
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+    
+    try
     {
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        try
+        logger.LogInformation("Starting database migration with Azure AD authentication...");
+        
+        // Test connection with retry logic
+        var retryCount = 0;
+        var maxRetries = 3;
+        bool connected = false;
+        
+        while (!connected && retryCount < maxRetries)
         {
-            context.Database.Migrate();
+            try
+            {
+                connected = await context.Database.CanConnectAsync();
+                if (connected)
+                {
+                    logger.LogInformation("Successfully connected to Azure SQL Database using Azure AD");
+                    break;
+                }
+            }
+            catch (Exception ex)
+            {
+                retryCount++;
+                logger.LogWarning(ex, "Connection attempt {RetryCount} failed, retrying...", retryCount);
+                if (retryCount < maxRetries)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(5)); // Wait before retry
+                }
+            }
         }
-        catch (Exception ex)
+        
+        if (connected)
         {
-            // Log migration error
-            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-            logger.LogError(ex, "An error occurred while migrating the database.");
+            // Apply migrations
+            var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
+            logger.LogInformation($"Pending migrations: {string.Join(", ", pendingMigrations)}");
+            
+            if (pendingMigrations.Any())
+            {
+                await context.Database.MigrateAsync();
+                logger.LogInformation("Database migration completed successfully");
+            }
+            else
+            {
+                logger.LogInformation("No pending migrations found");
+            }
+            
+            // Verify tables exist
+            var userCount = await context.Users.CountAsync();
+            logger.LogInformation($"Current user count in database: {userCount}");
+        }
+        else
+        {
+            logger.LogError("Failed to connect to database after {MaxRetries} attempts", maxRetries);
+        }
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "Database migration failed: {Message}", ex.Message);
+        logger.LogError("Inner exception: {InnerException}", ex.InnerException?.Message);
+        
+        // In production, don't crash the app - let it start without migration
+        if (app.Environment.IsDevelopment())
+        {
+            throw;
         }
     }
 }
