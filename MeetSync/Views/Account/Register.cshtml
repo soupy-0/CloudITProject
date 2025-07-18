@@ -29,52 +29,53 @@
             <form asp-action="Register" method="post" style="max-width: 500px; margin: 0 auto;">
                 @Html.AntiForgeryToken()
                 
-                <div asp-validation-summary="ModelOnly" style="color: #ff6b6b; margin-bottom: 1rem;"></div>
-                
-                <div style="margin-bottom: 1rem;">
-                    <label asp-for="Name" style="display: block; margin-bottom: 0.5rem; color: white;">Full Name:</label>
-                    <input asp-for="Name" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;" />
-                    <span asp-validation-for="Name" style="color: #ff6b6b; font-size: 0.875rem;"></span>
+                <div asp-validation-summary="ModelOnly" class="validation-summary"></div>      
+
+                <div class="form-group">
+                    <label asp-for="Name">Full Name:</label>
+                    <input asp-for="Name" type="text" class="form-input" />
+                    <span asp-validation-for="Name" class="validation-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email">Email:</label>
+                    <input asp-for="Email" type="email" class="form-input" />
+                    <span asp-validation-for="Email" class="validation-error"></span>
+                </div>
+
+                 <div class="form-group">
+                    <label asp-for="Password">Password:</label>
+                    <input asp-for="Password" type="password" class="form-input" />
+                    <span asp-validation-for="Password" class="validation-error"></span>
                 </div>
                 
-                <div style="margin-bottom: 1rem;">
-                    <label asp-for="Email" style="display: block; margin-bottom: 0.5rem; color: white;">Email:</label>
-                    <input asp-for="Email" type="email" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;" />
-                    <span asp-validation-for="Email" style="color: #ff6b6b; font-size: 0.875rem;"></span>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword">Confirm Password:</label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-input" />
+                    <span asp-validation-for="ConfirmPassword" class="validation-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Workplace">Workplace (Optional):</label>
+                    <input asp-for="Workplace" type="text" class="form-input" />
                 </div>
                 
-                <div style="margin-bottom: 1rem;">
-                    <label asp-for="Password" style="display: block; margin-bottom: 0.5rem; color: white;">Password:</label>
-                    <input asp-for="Password" type="password" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;" />
-                    <span asp-validation-for="Password" style="color: #ff6b6b; font-size: 0.875rem;"></span>
+                <div class="form-group">
+                    <label asp-for="AboutSection">About You (Optional):</label>
+                    <textarea asp-for="AboutSection" rows="3" class="form-input form-textarea"></textarea>
                 </div>
                 
-                <div style="margin-bottom: 1rem;">
-                    <label asp-for="ConfirmPassword" style="display: block; margin-bottom: 0.5rem; color: white;">Confirm Password:</label>
-                    <input asp-for="ConfirmPassword" type="password" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;" />
-                    <span asp-validation-for="ConfirmPassword" style="color: #ff6b6b; font-size: 0.875rem;"></span>
+                <div class="form-group">
+                    <label asp-for="Interests">Interests (comma-separated):</label>
+                    <input asp-for="Interests" type="text" class="form-input" placeholder="e.g., JavaScript, Design, Marketing" />
                 </div>
                 
-                <div style="margin-bottom: 1rem;">
-                    <label asp-for="Workplace" style="display: block; margin-bottom: 0.5rem; color: white;">Workplace (Optional):</label>
-                    <input asp-for="Workplace" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;" />
-                </div>
-                
-                <div style="margin-bottom: 1rem;">
-                    <label asp-for="AboutSection" style="display: block; margin-bottom: 0.5rem; color: white;">About You (Optional):</label>
-                    <textarea asp-for="AboutSection" rows="3" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white; resize: vertical;"></textarea>
-                </div>
-                
-                <div style="margin-bottom: 1rem;">
-                    <label asp-for="Interests" style="display: block; margin-bottom: 0.5rem; color: white;">Interests (comma-separated):</label>
-                    <input asp-for="Interests" placeholder="e.g., JavaScript, Design, Marketing" style="width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;" />
-                </div>
-                
-                <button type="submit" style="width: 100%; padding: 0.75rem; background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 5px; font-size: 1rem; font-weight: 600; cursor: pointer;">Create Account</button>
-                
-                <p style="text-align: center; margin-top: 1rem; color: rgba(255,255,255,0.8);">
-                    Already have an account? <a href="@Url.Action("Login", "Account")" style="color: #667eea;">Login here</a>
+                <button type="submit" class="submit-button">Create Account</button>   
+
+                <p class="register-link">
+                    Already have an account? <a href="@Url.Action("Login", "Account")">Login here</a>
                 </p>
+
             </form>
         </div>
     </div>

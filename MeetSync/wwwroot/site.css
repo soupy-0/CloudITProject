@@ -64,46 +64,22 @@ body
     padding: 40px;         
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    color: #333 !important; /* Dark text for visibility */
-    background-color: rgba(255, 255, 255, 0.95) !important; /* Slightly off-white background */
-    border: 1px solid #ddd;
-    padding: 0.75rem;
-    border-radius: 5px;
-    font-size: 16px;
-    width: 100%;
-}
-
-/* Placeholder text styling */
-input::placeholder {
-    color: #888 !important; /* Gray placeholder text */
-    opacity: 1;
-}
-
-/* Focus state for better user experience */
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    outline: none;
-    border-color: #4C3BCF; /* Match your theme color */
-    box-shadow: 0 0 0 2px rgba(76, 59, 207, 0.2);
-    background-color: #fff !important;
+.form-input {
     color: #333 !important;
+    background-color: #fff !important;
+    border: 2px solid #ddd !important;
+    padding: 0.75rem !important;
+    border-radius: 5px !important;
+    width: 100% !important;
 }
 
-/* Form labels to match your design */
-label {
-    color: #333 !important; /* Dark text on white surface */
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
 }
 
-/* Style checkboxes properly */
-input[type="checkbox"] {
-    width: auto !important;
-    margin-right: 8px;
+.form-textarea:focus {
+    outline: none;
+    border-color: #4C3BCF;
+    box-shadow: 0 0 0 3px rgba(76, 59, 207, 0.2);
 }
-
